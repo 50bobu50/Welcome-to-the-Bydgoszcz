@@ -2,4 +2,4 @@
 Bydgoszcz
 
 TODO:
--: Delete Walter White
+- :Delete Walter White
