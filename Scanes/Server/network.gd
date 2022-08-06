@@ -65,3 +65,4 @@ remote func register_player(info):
 	
 remote func test(test):
 	print(test)
+

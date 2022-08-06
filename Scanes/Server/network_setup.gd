@@ -5,8 +5,8 @@ func _ready():
 	show()
 
 func _on_IP_text_changed(new_text):
-	Network.ip_adress = new_text
-	hide()
+	Network.IP_ADRESS = new_text
+	print(new_text)
 
 func _on_HOST_pressed():
 	Network.create_server()
