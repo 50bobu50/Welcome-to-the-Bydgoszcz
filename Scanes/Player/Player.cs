@@ -15,8 +15,6 @@ public class Player : KinematicBody
 	{
 		_character = GetNode<Spatial>("Pivot");
 		_camera = GetNode<Camera>("Position3D/Camera");
-
-		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 	public override void _PhysicsProcess(float delta)
 	{
@@ -48,6 +46,9 @@ public class Player : KinematicBody
 			_character.LookAt(Translation + direction, Vector3.Up);
 		}
 
+		direction = direction.Rotated(Vector3.Up, _camera.GlobalRotation.y).Normalized();
+		GD.Print(direction);
+		GD.Print(_camera.GlobalRotation.y);
 		//Ground Velcity
 		_velocity.x = direction.x * Speed;
 		_velocity.z = direction.z * Speed;
@@ -67,9 +68,20 @@ public class Player : KinematicBody
 			
 			_character.RotateX(Mathf.Deg2Rad(mouseEvent.Relative.y * MouseSensitivity));
 			RotateY(Mathf.Deg2Rad(-mouseEvent.Relative.x * MouseSensitivity));
+
 			Vector3 cameraRot = _camera.RotationDegrees;
 			cameraRot.x = Mathf.Clamp(cameraRot.x, -70, 70);
 			_character.RotationDegrees = cameraRot;	
+		}
+		else if (@event is InputEventMouseButton eventMouseButton) 
+		{
+			if (eventMouseButton.Pressed == true) {
+				Input.MouseMode = Input.MouseModeEnum.Captured;
+			}
+			else
+			{
+				Input.MouseMode = Input.MouseModeEnum.Visible;
+			}
 		}
 	}
 }
