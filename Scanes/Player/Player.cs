@@ -5,7 +5,7 @@ public class Player : KinematicBody
 {
 	public int Speed = 14;
 	public int FallAcceleration = 75;
-	public float MouseSensitivity = 0.005f;
+	public float MouseSensitivity = 0.001f;
 	private Vector3 _velocity = Vector3.Zero;
 
 
@@ -73,12 +73,18 @@ public class Player : KinematicBody
 			
 			_rotationX += -mouseEvent.Relative.x * MouseSensitivity;
 			_rotationY += -mouseEvent.Relative.y * MouseSensitivity;
+			
+			//muj konwertor 👍 
+			//Ograniczenie osi Y dla kamery od -50 do 50 stopni
+			float rotationYDeg = Mathf.Rad2Deg(_rotationY);
+			_rotationY = Mathf.Deg2Rad(Mathf.Clamp(rotationYDeg,-50,50));
+			GD.Print(Mathf.Rad2Deg(_rotationY));
 
 			//tak 👍
 			Transform transform = Transform;
 			transform.basis = Basis.Identity;
 			Transform = transform;
-
+			
 			RotateObjectLocal(Vector3.Up,_rotationX);
 			RotateObjectLocal(Vector3.Right,_rotationY);
 		}
