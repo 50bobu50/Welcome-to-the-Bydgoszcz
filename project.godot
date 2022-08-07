@@ -14,11 +14,14 @@ config/name="WelcomeToTheBydgoszcz"
 run/main_scene="res://Scanes/Server/networkconnection.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Network="*res://Scanes/Server/network.gd"
+
 [display]
 
 window/size/width=1920
 window/size/height=1080
-
 
 [gui]
 

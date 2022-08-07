@@ -45,11 +45,6 @@ public class Player : KinematicBody
 			direction.z -= 1f;
 		}
 
-		if (direction != Vector3.Zero)
-		{
-			direction = direction.Normalized();
-		}
-
 		//chodzenie względem kamery
 		direction = direction.Rotated(Vector3.Up, _camera.GlobalRotation.y).Normalized();
 		
