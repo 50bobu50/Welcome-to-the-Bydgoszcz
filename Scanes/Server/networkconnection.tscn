@@ -2,12 +2,7 @@
 
 [ext_resource path="res://Scanes/Server/network_setup.gd" type="Script" id=1]
 [ext_resource path="res://Scanes/menu font.tres" type="DynamicFont" id=2]
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends Container
-
-
-"
+[ext_resource path="res://Scanes/Server/LOBBY.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.109804, 0.101961, 0.129412, 1 )
@@ -17,7 +12,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="JOINMENU" type="Container" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -58,10 +52,10 @@ rect_min_size = Vector2( 600, 180 )
 custom_fonts/font = ExtResource( 2 )
 text = "JOIN"
 
-[node name="LOBBY" type="Container" parent="."]
+[node name="LOBBY" type="Container" parent="." groups=["Lobby"]]
 margin_right = 40.0
 margin_bottom = 40.0
-script = SubResource( 2 )
+script = ExtResource( 3 )
 
 [node name="ItemList" type="ItemList" parent="LOBBY"]
 margin_right = 1920.0
@@ -88,3 +82,4 @@ align = 1
 [connection signal="text_changed" from="JOINMENU/IP" to="JOINMENU" method="_on_IP_text_changed"]
 [connection signal="pressed" from="JOINMENU/HOST" to="JOINMENU" method="_on_HOST_pressed"]
 [connection signal="pressed" from="JOINMENU/JOIN" to="JOINMENU" method="_on_JOIN_pressed"]
+[connection signal="toggled" from="LOBBY/CheckBox" to="LOBBY" method="_on_CheckBox_toggled"]
