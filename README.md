@@ -4,3 +4,4 @@ Bydgoszcz
 TODO:
 - Delete Walter White
 - Dodać sex
+- USUŃ SEKS
