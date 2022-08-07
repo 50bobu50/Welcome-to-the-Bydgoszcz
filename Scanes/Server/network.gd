@@ -75,14 +75,18 @@ sync func update_lobby():
 remote func set_ready(status):
 	var id = get_tree().get_network_unique_id()
 	rpc("player_ready",id,status)
+	rpc_id(1,"check_ready")
 
 sync func player_ready(id,status):
 	players[id]["ready"]=status
 	update_lobby()
-	check_ready()
 	
-remote func check_ready():
+sync func check_ready():
 	for i in players:
 		if(players[i]["ready"]==false):
 			return null
-	print("GAME STARED")
+	rpc("game_start")
+
+sync func game_start():
+# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://Scanes/Main/Main.tscn")
