@@ -1,8 +1,5 @@
-[gd_scene load_steps=5 format=2]
-=======
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scanes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Grass.tres" type="Material" id=2]
 
 [sub_resource type="BoxShape" id=1]
@@ -57,14 +54,6 @@ directional_shadow_mode = 0
 directional_shadow_normal_bias = 0.0
 directional_shadow_depth_range = 1
 
-[node name="Cubes" type="Node" parent="."]
-
-[node name="RigidBody" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody"]
-=======
 [node name="RigidBody" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4, -11 )
 mass = 117.208
@@ -73,97 +62,7 @@ mass = 117.208
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0344524, 0.0940857, -0.00422955 )
 shape = SubResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody2" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 2 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody2"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody2/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody3" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -2 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody3"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody3/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody4" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 4 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody4"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody4/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody5" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 3 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody5"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody5/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody6" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 1 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody6"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody6/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody7" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -1 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody7"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody7/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody8" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 0 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody8"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody8/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody9" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 2 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody9"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody9/CollisionShape"]
-mesh = SubResource( 4 )
-
-[node name="RigidBody10" type="RigidBody" parent="Cubes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 1 )
-mass = 117.208
-
-[node name="CollisionShape" type="CollisionShape" parent="Cubes/RigidBody10"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Cubes/RigidBody10/CollisionShape"]
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody/CollisionShape"]
 mesh = SubResource( 4 )
 
 [node name="Players" type="Spatial" parent="."]

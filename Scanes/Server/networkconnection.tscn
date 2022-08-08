@@ -93,8 +93,8 @@ custom_styles/normal = SubResource( 1 )
 text = "READY?"
 align = 1
 
-[connection signal="text_changed" from="JOINMENU/NAME" to="JOINMENU" method="_on_IP_text_changed"]
 [connection signal="text_changed" from="JOINMENU/NAME" to="JOINMENU" method="_on_NAME_text_changed"]
+[connection signal="text_changed" from="JOINMENU/NAME" to="JOINMENU" method="_on_IP_text_changed"]
 [connection signal="text_changed" from="JOINMENU/IP" to="JOINMENU" method="_on_IP_text_changed"]
 [connection signal="pressed" from="JOINMENU/HOST" to="JOINMENU" method="_on_HOST_pressed"]
 [connection signal="pressed" from="JOINMENU/JOIN" to="JOINMENU" method="_on_JOIN_pressed"]
