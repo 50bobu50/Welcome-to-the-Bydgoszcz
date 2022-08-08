@@ -12,12 +12,19 @@ public class Player : KinematicBody
 	Vector3 direction = Vector3.Zero;
 	Vector3 velocity = Vector3.Zero;
 	Vector3 gravityforce = Vector3.Zero;
-	//
 	Camera camera;
 	Position3D head;
 	Spatial character;
+	
+	Tween movement_tween;
+	[Puppet]
+	Vector3 puppet_position;
+	[Puppet]
+	Vector3 puppet_velocity;
+	
 	public override void _Ready()
 	{
+		movement_tween = GetNode<Tween>("Tween");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		character = GetNode<Spatial>("Pivot");
 		head = GetNode<Position3D>("Position3D");
@@ -26,6 +33,29 @@ public class Player : KinematicBody
 
 	public override void _PhysicsProcess(float delta)
 	{
+		if (IsNetworkMaster())
+		{
+			Movement(delta);
+			RpcUnreliable("upddate_state", GlobalTransform.origin, velocity);
+		}
+		else
+		{
+			var GTransform = GlobalTransform;
+			GTransform.origin = puppet_position;
+			velocity.x = puppet_velocity.x;
+			velocity.z = puppet_velocity.z;
+		}
+	} 
+	[Puppet]
+	public void upddate_state(Vector3 p_position, Vector3 p_velocity)
+	{
+		puppet_velocity = p_velocity;
+		puppet_position = p_position;
+		movement_tween.InterpolateProperty(this,"global_transform",GlobalTransform, new Transform(GlobalTransform.basis,p_position),0.1f);
+		movement_tween.Start();
+	}
+	public void Movement(float delta)
+	{
 		//Direction
 		direction = Vector3.Zero;
 		//	KURWAAA
@@ -33,9 +63,6 @@ public class Player : KinematicBody
 		float forwardInput = Input.GetActionStrength("move_back") - Input.GetActionStrength("move_forward");
 		float rightInput = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
 		direction = new Vector3(rightInput,0,forwardInput).Rotated(Vector3.Up, hrot).Normalized();
-
-
-		
 		if (IsOnFloor())
 		{
 			gravityforce = Vector3.Zero;
@@ -49,14 +76,12 @@ public class Player : KinematicBody
 		{
 			gravityforce = Vector3.Up * jump;
 		}
-
 		velocity = velocity.LinearInterpolate(direction * speed, acc * delta);
 		velocity = velocity + gravityforce;
 		MoveAndSlide(velocity,Vector3.Up);
 	}
-
 	public override void _Input(InputEvent @event)
-	{
+	{	
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
 
@@ -77,5 +102,3 @@ public class Player : KinematicBody
 		}
 	}
 }
-
-

@@ -8,7 +8,7 @@ var MAX_PLAYERS  = 5
 var server
 var client 
 var players = {}
-var info = {"name":"name", "ready":false}
+var info = {"name":null, "ready":false}
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -20,7 +20,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self ,"_player_connected")
 	# warning-ignore:return_value_discarded
-	get_tree().connect("network_peer_connected", self ,"_player_disconnected")
+	get_tree().connect("network_peer_disconnected", self ,"_player_disconnected")
 
 func create_server():
 	print("CREATING SERVER")
@@ -38,7 +38,7 @@ func join_server():
 	get_tree().network_peer = client
 
 func reset_networking_connection():
-	if get_tree().has_network_peer():
+	if get_tree().has_network_peer() == false:
 		get_tree().network.peer = null
 
 func _connected_ok():
@@ -61,6 +61,7 @@ func _player_disconnected(id):
 	print("PLAYER: %s DISCONNECTED" % id)
 	players.erase(id)
 	rpc("update_lobby")
+
 
 remote func register_player(player_info):
 	var id = get_tree().get_rpc_sender_id()
@@ -85,8 +86,14 @@ sync func check_ready():
 	for i in players:
 		if(players[i]["ready"]==false):
 			return null
-	rpc("game_start")
+	rpc("load_map")
 
-sync func game_start():
-# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Scanes/Main/Main.tscn")
+sync func load_map():
+	get_node("/root/server_gui/LOBBY").visible = false
+	var world = load("res://Scanes/Main/Main.tscn").instance()
+	get_node("/root").add_child(world)
+	for i in players:
+		var player = preload("res://Scanes/Player/Player.tscn").instance()
+		player.set_name(str(i))
+		player.set_network_master(i)
+		get_node("/root/Main/Players").add_child(player)
