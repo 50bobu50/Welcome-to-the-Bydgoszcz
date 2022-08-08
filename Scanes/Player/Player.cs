@@ -3,9 +3,11 @@ using System;
 
 public class Player : KinematicBody
 {
-	public int Speed = 14;
+	public float Speed = 1f;
+	public int MaxSpeed = 5;
+	public float CounterMometum = 0.2f;
 	public int FallAcceleration = 75;
-	public float MouseSensitivity = 0.001f;
+	public float MouseSensitivity = 0.0025f;
 	private Vector3 _velocity = Vector3.Zero;
 
 
@@ -47,15 +49,46 @@ public class Player : KinematicBody
 
 		//chodzenie względem kamery
 		direction = direction.Rotated(Vector3.Up, _camera.GlobalRotation.y).Normalized();
-		
 		//Ground Velcity
-		_velocity.x = direction.x * Speed;
-		_velocity.z = direction.z * Speed;
+		_velocity.x += direction.x * Speed;
+		_velocity.z += direction.z * Speed;
 		
+		
+		//GD.Print(direction);
+		
+		_velocity.x = Mathf.Clamp(_velocity.x,-MaxSpeed,MaxSpeed);
+		_velocity.z = Mathf.Clamp(_velocity.z,-MaxSpeed,MaxSpeed);
+
+		//Add Counter momentum
+		if (direction.x == 0)
+		{
+			if (_velocity.x > 0)
+			{
+				_velocity.x -= Mathf.Clamp(direction.x,0,CounterMometum);
+			}
+			else if (_velocity.x < 0)
+			{
+				_velocity.x += Mathf.Clamp(-direction.x,0,CounterMometum);
+			}
+		}
+
+		if (direction.z == 0)
+		{
+			if (_velocity.z > 0)
+			{
+				_velocity.z -= Mathf.Clamp(direction.z,0,CounterMometum);
+			}
+			else if (_velocity.z < 0)
+			{
+				_velocity.z += Mathf.Clamp(-direction.z,0,CounterMometum);
+			}
+		}
+
 		//Vertical velocity
+		GD.Print("velocity X:"+Mathf.Round(_velocity.x)+" velocity Z:"+Mathf.Round(_velocity.z));
 		_velocity.y -= FallAcceleration * delta;
 		
-		// Moving the character
+		// Moving the characte
 		_velocity = MoveAndSlide(_velocity,Vector3.Up);
 	}
 
@@ -70,10 +103,9 @@ public class Player : KinematicBody
 			_rotationY += -mouseEvent.Relative.y * MouseSensitivity;
 			
 			//muj konwertor 👍 
-			//Ograniczenie osi Y dla kamery od -50 do 50 stopni
+			//Ograniczenie osi Y dla kamery (-50,50 stopni)
 			float rotationYDeg = Mathf.Rad2Deg(_rotationY);
 			_rotationY = Mathf.Deg2Rad(Mathf.Clamp(rotationYDeg,-50,50));
-			GD.Print(Mathf.Rad2Deg(_rotationY));
 
 			//tak 👍
 			Transform transform = Transform;
