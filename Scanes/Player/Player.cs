@@ -16,7 +16,6 @@ public class Player : KinematicBody
 	Position3D head;
 	Spatial character;
 	
-	//server
 	Tween movement_tween;
 	[Puppet]
 	Vector3 puppet_position;
@@ -64,7 +63,6 @@ public class Player : KinematicBody
 		float forwardInput = Input.GetActionStrength("move_back") - Input.GetActionStrength("move_forward");
 		float rightInput = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
 		direction = new Vector3(rightInput,0,forwardInput).Rotated(Vector3.Up, hrot).Normalized();
-		
 		if (IsOnFloor())
 		{
 			gravityforce = Vector3.Zero;
@@ -84,7 +82,6 @@ public class Player : KinematicBody
 	}
 	public override void _Input(InputEvent @event)
 	{	
-  		// Mouse in viewport coordinates.
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
 
