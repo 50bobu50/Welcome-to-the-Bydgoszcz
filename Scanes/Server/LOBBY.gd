@@ -6,8 +6,7 @@ func update_lobby(players):
 	item_list = $ItemList
 	item_list.clear()
 	for id in players:
-		var line = "{id},{info}".format({"id":id,"info":players[id]})
-		item_list.add_item(line)
+		item_list.add_item(players[id]["name"],null,false)
 
 
 func _on_CheckBox_toggled(button_pressed):

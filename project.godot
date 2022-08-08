@@ -14,11 +14,26 @@ config/name="WelcomeToTheBydgoszcz"
 run/main_scene="res://Scanes/Server/networkconnection.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Network="*res://Scanes/Server/network.gd"
+
+[debug]
+
+multirun/number_of_windows=2
+multirun/window_distance=1270
+multirun/add_custom_args=true
+multirun/first_window_args="listen"
+multirun/other_window_args="join"
+
 [display]
 
 window/size/width=1920
 window/size/height=1080
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
 
 [gui]
 

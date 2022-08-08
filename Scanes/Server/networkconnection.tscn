@@ -7,11 +7,12 @@
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.109804, 0.101961, 0.129412, 1 )
 
-[node name="Controll" type="Control"]
+[node name="server_gui" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="JOINMENU" type="Container" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -21,6 +22,18 @@ margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 20.0
 script = ExtResource( 1 )
+
+[node name="NAME" type="LineEdit" parent="JOINMENU"]
+anchor_right = 1.0
+margin_left = -400.0
+margin_top = -450.0
+margin_right = -40.0
+margin_bottom = -460.0
+rect_min_size = Vector2( 800, 120 )
+custom_fonts/font = ExtResource( 2 )
+align = 1
+max_length = 15
+placeholder_text = "DAWAJ NAZWĘ"
 
 [node name="IP" type="LineEdit" parent="JOINMENU"]
 anchor_right = 1.0
@@ -32,7 +45,7 @@ rect_min_size = Vector2( 800, 120 )
 custom_fonts/font = ExtResource( 2 )
 align = 1
 max_length = 15
-placeholder_text = "DAWAJ IP"
+placeholder_text = "127.0.0.1"
 
 [node name="HOST" type="Button" parent="JOINMENU"]
 margin_left = -300.0
@@ -61,6 +74,7 @@ script = ExtResource( 3 )
 margin_right = 1920.0
 margin_bottom = 900.0
 rect_min_size = Vector2( 500, 0 )
+custom_fonts/font = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="LOBBY"]
 margin_top = 900.0
@@ -79,6 +93,8 @@ custom_styles/normal = SubResource( 1 )
 text = "READY?"
 align = 1
 
+[connection signal="text_changed" from="JOINMENU/NAME" to="JOINMENU" method="_on_IP_text_changed"]
+[connection signal="text_changed" from="JOINMENU/NAME" to="JOINMENU" method="_on_NAME_text_changed"]
 [connection signal="text_changed" from="JOINMENU/IP" to="JOINMENU" method="_on_IP_text_changed"]
 [connection signal="pressed" from="JOINMENU/HOST" to="JOINMENU" method="_on_HOST_pressed"]
 [connection signal="pressed" from="JOINMENU/JOIN" to="JOINMENU" method="_on_JOIN_pressed"]
