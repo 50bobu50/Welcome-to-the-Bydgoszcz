@@ -1,0 +1,65 @@
+using Godot;
+using System;
+
+public class Saul : KinematicBody
+{
+	float speed = 10f;
+	float acc = 10f;
+	float gravity = 10f;
+
+	Vector3 direction = Vector3.Zero;
+	Vector3 velocity = Vector3.Zero;
+	Vector3 gravityforce = Vector3.Zero;
+
+	NavigationAgent navAgent;
+	KinematicBody target;
+	Vector3 targetPos;
+	public override void _Ready()
+	{
+		navAgent = GetNode<NavigationAgent>("NavigationAgent");
+		navAgent.SetNavigation(GetNode<Navigation>("/root/Main/Navigation"));
+		target = GetNode<KinematicBody>("/root/Main/Player");
+		
+	}
+
+	public override void _PhysicsProcess(float delta)
+	{
+		targetPos = target.GlobalTransform.origin;
+		velocity = Vector3.Zero;
+		if (targetPos != Vector3.Zero)
+		{
+			navAgent.SetTargetLocation(targetPos);
+		}
+		else
+		{
+			navAgent.SetTargetLocation(GlobalTransform.origin);
+		}
+
+		Vector3 nextPoint = navAgent.GetNextLocation();
+		direction = (nextPoint - GlobalTransform.origin).Normalized();
+
+		//GRAVITY
+		if (IsOnFloor())
+		{
+			gravityforce = Vector3.Zero;
+		}
+		else
+		{
+			gravityforce += Vector3.Down * gravity * delta;
+		}
+
+		//Velocity things
+		velocity = velocity.LinearInterpolate(direction * speed, acc * delta);
+		velocity = velocity + gravityforce;
+
+		//LOOK AT FUNCTION
+		Vector3 lookDirection = GlobalTransform.origin - direction;
+		lookDirection.y = GlobalTransform.origin.y;
+		if (lookDirection != GlobalTransform.origin)
+		{
+			LookAt(lookDirection,Vector3.Up);
+		}
+
+		MoveAndSlide(velocity, Vector3.Up);
+	}
+}

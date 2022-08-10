@@ -7,7 +7,7 @@ public class Player : KinematicBody
 	float acc = 10f;
 	float gravity = 10f;
 	float mouseSensitivity = 0.1f;
-	float jump = 3f;
+	float jump = 3.5f;
 
 	Vector3 direction = Vector3.Zero;
 	Vector3 velocity = Vector3.Zero;
@@ -33,10 +33,14 @@ public class Player : KinematicBody
 
 	public override void _PhysicsProcess(float delta)
 	{
+		Movement(delta);
+		RpcUnreliable("upddate_state", GlobalTransform.origin, velocity);
+
+		/*
 		if (IsNetworkMaster())
 		{
-			Movement(delta);
-			RpcUnreliable("upddate_state", GlobalTransform.origin, velocity);
+			
+			
 		}
 		else
 		{
@@ -45,6 +49,7 @@ public class Player : KinematicBody
 			velocity.x = puppet_velocity.x;
 			velocity.z = puppet_velocity.z;
 		}
+		*/
 	} 
 	[Puppet]
 	public void upddate_state(Vector3 p_position, Vector3 p_velocity)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SaulTheme.mp3-12c3c7945204871b859db772eabca2c6.mp3str"
+
+[deps]
+
+source_file="res://Audio/SaulTheme.mp3"
+dest_files=[ "res://.import/SaulTheme.mp3-12c3c7945204871b859db772eabca2c6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
