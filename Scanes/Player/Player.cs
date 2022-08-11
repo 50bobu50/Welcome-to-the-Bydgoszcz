@@ -33,13 +33,10 @@ public class Player : KinematicBody
 
 	public override void _PhysicsProcess(float delta)
 	{
-		Movement(delta);
-		RpcUnreliable("upddate_state", GlobalTransform.origin, velocity);
-
-		/*
 		if (IsNetworkMaster())
 		{
-			
+			Movement(delta);
+			RpcUnreliable("upddate_state", GlobalTransform.origin, velocity);
 			
 		}
 		else
@@ -49,7 +46,6 @@ public class Player : KinematicBody
 			velocity.x = puppet_velocity.x;
 			velocity.z = puppet_velocity.z;
 		}
-		*/
 	} 
 	[Puppet]
 	public void upddate_state(Vector3 p_position, Vector3 p_velocity)

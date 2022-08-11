@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scanes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Grass.tres" type="Material" id=2]
 [ext_resource path="res://Scanes/Saul/Saul.tscn" type="PackedScene" id=3]
 
@@ -35,9 +34,6 @@ shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody/CollisionShape"]
 mesh = SubResource( 4 )
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.787881, 1.00001, -0.0221186 )
 
 [node name="Navigation" type="Navigation" parent="."]
 
@@ -83,3 +79,5 @@ material/0 = ExtResource( 2 )
 
 [node name="Saul" parent="." instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 18 )
+
+[node name="Players" type="Spatial" parent="."]

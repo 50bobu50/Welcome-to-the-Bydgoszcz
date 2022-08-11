@@ -14,16 +14,27 @@ public class Saul : KinematicBody
 	NavigationAgent navAgent;
 	KinematicBody target;
 	Vector3 targetPos;
+	Godot.Collections.Array targets;
 	public override void _Ready()
 	{
 		navAgent = GetNode<NavigationAgent>("NavigationAgent");
 		navAgent.SetNavigation(GetNode<Navigation>("/root/Main/Navigation"));
-		target = GetNode<KinematicBody>("/root/Main/Player");
-		
 	}
 
 	public override void _PhysicsProcess(float delta)
 	{
+		float targetDistance = 0f;
+		target = null;
+		//Target location
+		targets = GetTree().GetNodesInGroup("Player");
+		foreach (KinematicBody player in targets)
+		{
+			if(player.GlobalTransform.origin.DistanceTo(GlobalTransform.origin)<targetDistance || target is null)
+			{
+				targetDistance=player.GlobalTransform.origin.DistanceTo(GlobalTransform.origin);
+				target = player;
+			}
+		}
 		targetPos = target.GlobalTransform.origin;
 		velocity = Vector3.Zero;
 		if (targetPos != Vector3.Zero)
