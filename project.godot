@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="WelcomeToTheBydgoszcz"
-run/main_scene="res://Scanes/Server/networkconnection.tscn"
+run/main_scene="res://Scanes/Menu/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

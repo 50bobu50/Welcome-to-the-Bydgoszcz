@@ -12,7 +12,7 @@ public class Saul : KinematicBody
 	Vector3 gravityforce = Vector3.Zero;
 
 	NavigationAgent navAgent;
-	KinematicBody target;
+	KinematicBody target = null;
 	Vector3 targetPos;
 	Godot.Collections.Array targets;
 	public override void _Ready()
@@ -24,7 +24,6 @@ public class Saul : KinematicBody
 	public override void _PhysicsProcess(float delta)
 	{
 		float targetDistance = 0f;
-		target = null;
 		//Target location
 		targets = GetTree().GetNodesInGroup("Player");
 		foreach (KinematicBody player in targets)

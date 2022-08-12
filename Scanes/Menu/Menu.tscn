@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Textures/SaulGoodman.png" type="Texture" id=1]
+[ext_resource path="res://Scanes/menu font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Audio/Menu.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Scanes/Menu/fnaf/3.png" type="Texture" id=4]
+[ext_resource path="res://Scanes/Menu/fnaf/4.png" type="Texture" id=5]
+[ext_resource path="res://Scanes/Menu/fnaf/6.png" type="Texture" id=6]
+[ext_resource path="res://Scanes/Menu/fnaf/7.png" type="Texture" id=7]
+[ext_resource path="res://Scanes/Menu/fnaf/5.png" type="Texture" id=8]
+[ext_resource path="res://Scanes/Menu/fnaf/1.png" type="Texture" id=9]
+[ext_resource path="res://Scanes/Menu/fnaf/2.png" type="Texture" id=10]
+[ext_resource path="res://Scanes/Menu/fnaf/8.png" type="Texture" id=11]
+[ext_resource path="res://Scanes/Menu/menu.gd" type="Script" id=12]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.807843 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Container" type="Container" parent="."]
+margin_left = -6.10352e-05
+script = ExtResource( 12 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Container"]
+stream = ExtResource( 3 )
+volume_db = -30.0
+autoplay = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Container"]
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 960, 540 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 3 )
+speed_scale = 5.0
+playing = true
+
+[node name="SaulGoodman" type="Sprite" parent="Container"]
+position = Vector2( 1000, 500 )
+scale = Vector2( 8, 4 )
+texture = ExtResource( 1 )
+
+[node name="Container" type="Container" parent="Container"]
+margin_left = 1220.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Panel" type="Panel" parent="Container/Container"]
+margin_right = 700.0
+margin_bottom = 1080.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="SinglePlayer" type="Button" parent="Container/Container"]
+margin_left = 100.0
+margin_top = 13.0
+margin_right = 600.0
+margin_bottom = 263.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "¿NO FRINEDS?"
+
+[node name="Multiplayer" type="Button" parent="Container/Container"]
+margin_left = 100.0
+margin_top = 263.0
+margin_right = 600.0
+margin_bottom = 513.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "YU MY FRIEND NOW"
+
+[node name="Options" type="Button" parent="Container/Container"]
+margin_left = 100.0
+margin_top = 526.0
+margin_right = 600.0
+margin_bottom = 776.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Fabrical Settings"
+
+[node name="Exit" type="Button" parent="Container/Container"]
+margin_left = 100.0
+margin_top = 789.0
+margin_right = 600.0
+margin_bottom = 1039.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "WHY U LEAVE"
+
+[connection signal="pressed" from="Container/Container/SinglePlayer" to="Container" method="_on_SinglePlayer_pressed"]
+[connection signal="pressed" from="Container/Container/Multiplayer" to="Container" method="_on_Multiplayer_pressed"]
+[connection signal="pressed" from="Container/Container/Options" to="Container" method="_on_Options_pressed"]
+[connection signal="pressed" from="Container/Container/Exit" to="Container" method="_on_Exit_pressed"]
