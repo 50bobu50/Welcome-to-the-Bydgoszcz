@@ -15,7 +15,8 @@ public class Player : KinematicBody
 	Camera camera;
 	Position3D head;
 	Spatial character;
-	
+	RayCast raycastView;
+
 	Tween movement_tween;
 	[Puppet]
 	Vector3 puppet_position;
@@ -29,6 +30,7 @@ public class Player : KinematicBody
 		character = GetNode<Spatial>("Pivot");
 		head = GetNode<Position3D>("Position3D");
 		camera = GetNode<Camera>("Position3D/Camera");
+		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -37,7 +39,6 @@ public class Player : KinematicBody
 		{
 			Movement(delta);
 			RpcUnreliable("upddate_state", GlobalTransform.origin, velocity);
-			
 		}
 		else
 		{
@@ -64,6 +65,8 @@ public class Player : KinematicBody
 		float forwardInput = Input.GetActionStrength("move_back") - Input.GetActionStrength("move_forward");
 		float rightInput = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
 		direction = new Vector3(rightInput,0,forwardInput).Rotated(Vector3.Up, hrot).Normalized();
+		
+		//Gravitation / falling
 		if (IsOnFloor())
 		{
 			gravityforce = Vector3.Zero;
@@ -73,10 +76,27 @@ public class Player : KinematicBody
 			gravityforce += Vector3.Down * gravity * delta;
 		}
 
+		//Jump 
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
 			gravityforce = Vector3.Up * jump;
 		}
+
+		//Pick up script
+		if (Input.IsActionJustPressed("left_click")) 
+		{
+			Godot.Object result = raycastView.GetCollider();
+			
+			if (result != null)
+			{
+				if (result is Area area) 
+				{
+					GD.Print(area.GetParent().Name);
+					area.GetParent().QueueFree();
+				}
+			}
+		}
+
 		velocity = velocity.LinearInterpolate(direction * speed, acc * delta);
 		velocity = velocity + gravityforce;
 		MoveAndSlide(velocity,Vector3.Up);
