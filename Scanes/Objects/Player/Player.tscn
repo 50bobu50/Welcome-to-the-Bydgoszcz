@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scanes/Player/Player.cs" type="Script" id=1]
+[ext_resource path="res://Scanes/Objects/Player/Player.cs" type="Script" id=1]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 0.5
@@ -9,6 +9,9 @@ mid_height = 3.0
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.5
 height = 3.0
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.25, 0.25, 0.5 )
 
 [node name="Player" type="KinematicBody" groups=["Player"]]
 script = ExtResource( 1 )
@@ -29,11 +32,39 @@ shape = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 
 [node name="Camera" type="Camera" parent="Position3D"]
+cull_mask = 1048573
+fov = 55.0
 
 [node name="RayCast" type="RayCast" parent="Position3D/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -3 )
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Position3D/Camera"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Viewport" type="Viewport" parent="Position3D/Camera/ViewportContainer"]
+size = Vector2( 1920, 1080 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Flashlight" type="Camera" parent="Position3D/Camera/ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+cull_mask = 2
+current = true
+fov = 55.0
+
+[node name="Viewmodel" type="MeshInstance" parent="Position3D/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.928, -0.453, -1.7 )
+layers = 2
+mesh = SubResource( 3 )
+
+[node name="SpotLight" type="SpotLight" parent="Position3D/Camera/Viewmodel"]
+light_energy = 0.7
+spot_range = 20.0
+spot_angle = 30.0
 
 [node name="Tween" type="Tween" parent="."]

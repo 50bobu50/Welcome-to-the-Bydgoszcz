@@ -16,6 +16,7 @@ public class Player : KinematicBody
 	Position3D head;
 	Spatial character;
 	RayCast raycastView;
+	Camera flashlightcam;
 
 	Tween movement_tween;
 	[Puppet]
@@ -31,6 +32,7 @@ public class Player : KinematicBody
 		head = GetNode<Position3D>("Position3D");
 		camera = GetNode<Camera>("Position3D/Camera");
 		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
+		flashlightcam = GetNode<Camera>("Position3D/Camera/ViewportContainer/Viewport/Flashlight");
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -55,6 +57,10 @@ public class Player : KinematicBody
 		puppet_position = p_position;
 		movement_tween.InterpolateProperty(this,"global_transform",GlobalTransform, new Transform(GlobalTransform.basis,p_position),0.1f);
 		movement_tween.Start();
+	}
+	public override void _Process(float delta)
+	{
+		flashlightcam.GlobalTransform = camera.GlobalTransform;
 	}
 	public void Movement(float delta)
 	{

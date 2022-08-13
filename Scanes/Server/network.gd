@@ -93,7 +93,7 @@ sync func load_map():
 	var world = load("res://Scanes/Main/Main.tscn").instance()
 	get_node("/root/").add_child(world)
 	for i in players:
-		var player = preload("res://Scanes/Player/Player.tscn").instance()
+		var player = preload("res://Scanes/Objects/Player/Player.tscn").instance()
 		player.set_name(str(i))
 		player.set_network_master(i)
 		get_node("/root/Main/Players").add_child(player)

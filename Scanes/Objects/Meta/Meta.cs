@@ -14,7 +14,7 @@ public class Meta : Sprite3D
 	public override void _PhysicsProcess(float delta)
 	{
 		Transform Pozycja = Transform;
-		Pozycja.origin = RestPose.origin + new Vector3(0,(Mathf.Cos(Time.GetTicksMsec() * delta * .5f)) * 0.5f,0);
+		Pozycja.origin = RestPose.origin + new Vector3(0,(Mathf.Cos(Time.GetTicksMsec() * delta * .25f)) * 0.25f,0);
 		Transform = Pozycja;
 	}
 }	
