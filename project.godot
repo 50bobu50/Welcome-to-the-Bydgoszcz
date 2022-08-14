@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Network="*res://Scanes/Server/network.gd"
+Save="*res://Scanes/Menu/Settings/Save.cs"
 
 [debug]
 
@@ -30,6 +31,8 @@ multirun/other_window_args="join"
 
 window/size/width=1920
 window/size/height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 

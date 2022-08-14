@@ -18,11 +18,11 @@ animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "default",
-"speed": 5.0
+"speed": 30.0
 } ]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 0.807843 )
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -39,67 +39,57 @@ stream = ExtResource( 3 )
 volume_db = -30.0
 autoplay = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Container"]
-modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( 960, 540 )
-scale = Vector2( 1.5, 1.5 )
-z_index = 1
-frames = SubResource( 3 )
-frame = 1
-speed_scale = 5.0
-playing = true
-
-[node name="SaulGoodman" type="Sprite" parent="Container"]
+[node name="SaulGoodman2" type="Sprite" parent="Container"]
 position = Vector2( 1000, 500 )
 scale = Vector2( 8, 4 )
 texture = ExtResource( 1 )
 
-[node name="Node2D" type="Node2D" parent="Container"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Container"]
+modulate = Color( 1, 1, 1, 0.317647 )
+position = Vector2( 960, 540 )
+scale = Vector2( 1.5, 1.5 )
 z_index = 1
+frames = SubResource( 3 )
+playing = true
 
-[node name="Panel" type="Panel" parent="Container/Node2D"]
+[node name="Panel" type="Panel" parent="Container"]
 margin_left = 1220.0
 margin_right = 1920.0
 margin_bottom = 1080.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 4 )
 
-[node name="SinglePlayer" type="Button" parent="Container/Node2D"]
-margin_left = 1320.0
-margin_top = 13.0
-margin_right = 1820.0
-margin_bottom = 263.0
+[node name="Container" type="Container" parent="Container"]
+margin_left = 1220.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Play" type="Button" parent="Container/Container"]
+margin_left = 100.0
+margin_top = 66.0
+margin_right = 600.0
+margin_bottom = 316.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/normal = SubResource( 2 )
-text = "¿NO FRINEDS?"
+text = "GAMING"
 
-[node name="Multiplayer" type="Button" parent="Container/Node2D"]
-margin_left = 1320.0
-margin_top = 263.0
-margin_right = 1820.0
-margin_bottom = 513.0
-custom_fonts/font = ExtResource( 2 )
-custom_styles/normal = SubResource( 2 )
-text = "YU MY FRIEND NOW"
-
-[node name="Options" type="Button" parent="Container/Node2D"]
-margin_left = 1320.0
-margin_top = 526.0
-margin_right = 1820.0
-margin_bottom = 776.0
+[node name="Options" type="Button" parent="Container/Container"]
+margin_left = 100.0
+margin_top = 382.0
+margin_right = 600.0
+margin_bottom = 632.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/normal = SubResource( 2 )
 text = "Fabrical Settings"
 
-[node name="Exit" type="Button" parent="Container/Node2D"]
-margin_left = 1320.0
-margin_top = 789.0
-margin_right = 1820.0
-margin_bottom = 1039.0
+[node name="Exit" type="Button" parent="Container/Container"]
+margin_left = 100.0
+margin_top = 698.0
+margin_right = 600.0
+margin_bottom = 948.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/normal = SubResource( 2 )
 text = "WHY U LEAVE"
 
-[connection signal="pressed" from="Container/Node2D/SinglePlayer" to="Container" method="_on_SinglePlayer_pressed"]
-[connection signal="pressed" from="Container/Node2D/Multiplayer" to="Container" method="_on_Multiplayer_pressed"]
-[connection signal="pressed" from="Container/Node2D/Options" to="Container" method="_on_Options_pressed"]
-[connection signal="pressed" from="Container/Node2D/Exit" to="Container" method="_on_Exit_pressed"]
+[connection signal="pressed" from="Container/Container/Play" to="Container" method="_on_Play_pressed"]
+[connection signal="pressed" from="Container/Container/Options" to="Container" method="_on_Options_pressed"]
+[connection signal="pressed" from="Container/Container/Exit" to="Container" method="_on_Exit_pressed"]

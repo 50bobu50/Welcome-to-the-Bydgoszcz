@@ -33,6 +33,9 @@ public class Player : KinematicBody
 		camera = GetNode<Camera>("Position3D/Camera");
 		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
 		flashlightcam = GetNode<Camera>("Position3D/Camera/ViewportContainer/Viewport/Flashlight");
+		Save save = (Save)GetNode("/root/Save");
+		//float fov = (float)save.gameSettings["fov"];
+		//camera.Fov = fov;
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -97,8 +100,11 @@ public class Player : KinematicBody
 			{
 				if (result is Area area) 
 				{
-					GD.Print(area.GetParent().Name);
-					area.GetParent().QueueFree();
+					if(area.GetParent().Name=="Meta")
+					{
+						var areaParent = area.GetParent();
+						Rpc("PickUp",areaParent);
+					}
 				}
 			}
 		}
@@ -127,5 +133,11 @@ public class Player : KinematicBody
 				GetTree().Quit();
 			}
 		}
+	}
+	[Sync]
+	public void PickUp(Node item)
+	{
+		GD.Print(item.Name);
+		item.QueueFree();
 	}
 }
