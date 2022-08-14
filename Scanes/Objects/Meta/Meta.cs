@@ -20,4 +20,14 @@ public class Meta : Sprite3D
 		//GD.Print(Pozycja.origin);
 		Transform = Pozycja;
 	}
+	public void PickUp()
+	{
+		GD.Print(Name);
+		Rpc("PickUpSnyc");
+	}
+	[Sync]
+	public void PickUpSnyc()
+	{
+		QueueFree();
+	}
 }	

@@ -102,8 +102,7 @@ public class Player : KinematicBody
 				{
 					if(area.GetParent().Name=="Meta")
 					{
-						var areaParent = area.GetParent();
-						Rpc("PickUp",areaParent);
+						(area.GetParent() as Meta).PickUp();
 					}
 				}
 			}
@@ -133,11 +132,5 @@ public class Player : KinematicBody
 				GetTree().Quit();
 			}
 		}
-	}
-	[Sync]
-	public void PickUp(Node item)
-	{
-		GD.Print(item.Name);
-		item.QueueFree();
 	}
 }
