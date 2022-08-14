@@ -5,6 +5,7 @@
 [ext_resource path="res://Scanes/Objects/Saul/Saul.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scanes/Objects/Tree/Drzwo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Textures/jinx.png" type="Texture" id=5]
+[ext_resource path="res://Scanes/Main/Game.cs" type="Script" id=6]
 
 [sub_resource type="BoxShape" id=3]
 
@@ -16,14 +17,14 @@ polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 
 
 [sub_resource type="CubeMesh" id=2]
 
-[sub_resource type="BoxShape" id=6]
-
 [sub_resource type="Environment" id=7]
 background_mode = 1
 ambient_light_color = Color( 0.227451, 0.227451, 0.227451, 1 )
 ambient_light_energy = 0.01
+fog_enabled = true
 
 [node name="Main" type="Node"]
+script = ExtResource( 6 )
 
 [node name="Cube" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4, -11 )
@@ -107,22 +108,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62294, 0, -9.29555 )
 
 [node name="Players" type="Spatial" parent="."]
 
-[node name="StaticBody" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 6 )
-
 [node name="Saul" parent="." instance=ExtResource( 3 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 18 )
-
-[node name="Meta" parent="." instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 2.65918, 0 )
-shaded = true
-
-[node name="Meta2" parent="." instance=ExtResource( 1 )]
-transform = Transform( -8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, -26, 2.65918, 9 )
-shaded = true
-texture = ExtResource( 5 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 1, 18 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 7 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="ShowGameInfo" type="Timer" parent="Timers"]
+
+[node name="RemovePointUI" type="Timer" parent="Timers"]
+
+[node name="MetaHolder" type="Node" parent="."]
+
+[node name="Meta2" parent="MetaHolder" instance=ExtResource( 1 )]
+transform = Transform( -8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, -26, 2.25918, 9 )
+shaded = true
+texture = ExtResource( 5 )
+
+[node name="Meta" parent="MetaHolder" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 2.25918, 0 )
+shaded = true

@@ -50,7 +50,7 @@ position = Vector2( 960, 540 )
 scale = Vector2( 1.5, 1.5 )
 z_index = 1
 frames = SubResource( 3 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="Panel" type="Panel" parent="Container"]

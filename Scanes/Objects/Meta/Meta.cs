@@ -22,7 +22,6 @@ public class Meta : Sprite3D
 	}
 	public void PickUp()
 	{
-		GD.Print(Name);
 		Rpc("PickUpSnyc");
 	}
 	[Sync]
