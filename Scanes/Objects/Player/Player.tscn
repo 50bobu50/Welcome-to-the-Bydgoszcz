@@ -469,6 +469,7 @@ fov = 55.0
 [node name="RayCast" type="RayCast" parent="Position3D/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -3 )
+collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false
 

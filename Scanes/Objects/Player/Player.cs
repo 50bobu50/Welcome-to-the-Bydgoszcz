@@ -4,6 +4,7 @@ using System;
 public class Player : KinematicBody
 {
 	float speed = 10f;
+	float sprintspeed = 20f;
 	float acc = 10f;
 	float gravity = 10f;
 	float mouseSensitivity = 0.1f;
@@ -24,6 +25,7 @@ public class Player : KinematicBody
 	[Puppet]
 	Vector3 puppet_velocity;
 	
+	public Save save;
 	public override void _Ready()
 	{
 		movement_tween = GetNode<Tween>("Tween");
@@ -33,7 +35,7 @@ public class Player : KinematicBody
 		camera = GetNode<Camera>("Position3D/Camera");
 		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
 		flashlightcam = GetNode<Camera>("Position3D/Camera/ViewportContainer/Viewport/Flashlight");
-		Save save = (Save)GetNode("/root/Save");
+		save = (Save)GetNode("/root/Save");
 		//float fov = (float)save.gameSettings["fov"];
 		//camera.Fov = fov;
 	}
@@ -98,6 +100,7 @@ public class Player : KinematicBody
 			
 			if (result != null)
 			{
+				GD.Print(result.GetType());
 				if (result is Area area) 
 				{
 					if(area.GetParent().GetParent().Name=="MetaHolder")
@@ -106,6 +109,20 @@ public class Player : KinematicBody
 					}
 				}
 			}
+		}
+
+		if (Input.IsActionPressed("sprint"))
+		{
+			velocity = velocity.LinearInterpolate(direction * sprintspeed, acc * delta);
+			float fov = (float)save.gameSettings["fov"];
+			flashlightcam.Fov = 90; 
+			camera.Fov = 90;
+		}
+		else
+		{
+			velocity = velocity.LinearInterpolate(direction * speed, acc * delta);
+			flashlightcam.Fov = 70; 
+			camera.Fov = 70;
 		}
 
 		velocity = velocity.LinearInterpolate(direction * speed, acc * delta);

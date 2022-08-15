@@ -1,24 +1,24 @@
 using Godot;
 using System;
 
-public class Meta : Sprite3D
+public class Meta : Spatial
 {
 	private Transform RestPose;
-	private Area ClickDetection;
+	private Sprite3D Sprite;
 	public override void _Ready()
 	{
-		RestPose = Transform;
-		ClickDetection = GetNode<Area>("Area");
+		Sprite = GetNode<Sprite3D>("MetaSprite");
+		RestPose = Sprite.Transform;
 	}
 
 	public override void _PhysicsProcess(float delta)
 	{
-		Transform Pozycja = Transform;
+		Transform Pozycja = Sprite.Transform;
 		Pozycja.origin = RestPose.origin + new Vector3(0,(Mathf.Cos(Time.GetTicksMsec() * delta * .25f)) * 0.25f,0);
 		Pozycja.basis = Pozycja.basis.Rotated(Vector3.Up,delta);
 		Pozycja.origin = RestPose.origin + new Vector3(0,(Mathf.Cos(Time.GetTicksMsec() * delta * .5f)) * 0.5f,0);
 		//GD.Print(Pozycja.origin);
-		Transform = Pozycja;
+		Sprite.Transform = Pozycja;
 	}
 	public void PickUp()
 	{
