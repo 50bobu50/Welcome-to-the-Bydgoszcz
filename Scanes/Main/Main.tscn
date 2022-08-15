@@ -22,7 +22,6 @@ polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 
 background_mode = 1
 ambient_light_color = Color( 0.227451, 0.227451, 0.227451, 1 )
 ambient_light_energy = 0.01
-fog_enabled = true
 
 [node name="Main" type="Node"]
 script = ExtResource( 6 )
@@ -125,6 +124,15 @@ environment = SubResource( 7 )
 
 [node name="Meta" parent="MetaHolder" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 3, -2 )
+
+[node name="Meta3" parent="MetaHolder" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55636, 3, -2 )
+
+[node name="Meta4" parent="MetaHolder" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55636, 3, 8.81738 )
+
+[node name="Meta5" parent="MetaHolder" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55636, 3, 1.94987 )
 
 [node name="Meta2" parent="MetaHolder" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 3, 10 )

@@ -19,6 +19,11 @@ public class Player : KinematicBody
 	RayCast raycastView;
 	Camera flashlightcam;
 
+	//Funny music things
+	AudioStreamPlayer3D muza;
+	float muzaplaybackposition = 0;
+
+
 	Tween movement_tween;
 	[Puppet]
 	Vector3 puppet_position;
@@ -34,6 +39,7 @@ public class Player : KinematicBody
 		camera = GetNode<Camera>("Position3D/Camera");
 		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
 		flashlightcam = GetNode<Camera>("Position3D/Camera/ViewportContainer/Viewport/Flashlight");
+		muza = GetNode<AudioStreamPlayer3D>("Position3D/Muza");
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -81,6 +87,7 @@ public class Player : KinematicBody
 		else
 		{
 			gravityforce += Vector3.Down * gravity * delta;
+			direction = direction * 1.5f;
 		}
 
 		//Jump 
@@ -118,6 +125,25 @@ public class Player : KinematicBody
 			velocity = velocity.LinearInterpolate(direction * speed, acc * delta);
 			flashlightcam.Fov = 70; 
 			camera.Fov = 70;
+		}
+		
+		Vector3 xzspeed = new Vector3(velocity.x,0,velocity.z);
+		if (Mathf.Round(xzspeed.LengthSquared()) > 220)
+		{
+			if (muza.Playing == false)
+			{
+				//muza.Seek();
+				muza.Play(muzaplaybackposition);
+			}
+		}
+		else
+		{
+			if (muza.Playing == true)
+			{
+				muzaplaybackposition = muza.GetPlaybackPosition();
+				muza.Stop();
+			}
+
 		}
 
 		velocity = velocity.LinearInterpolate(direction * speed, acc * delta);

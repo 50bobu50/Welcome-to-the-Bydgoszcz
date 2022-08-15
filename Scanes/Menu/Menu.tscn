@@ -22,7 +22,7 @@ animations = [ {
 } ]
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 0, 0, 0, 0.490196 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -48,9 +48,8 @@ texture = ExtResource( 1 )
 modulate = Color( 1, 1, 1, 0.317647 )
 position = Vector2( 960, 540 )
 scale = Vector2( 1.5, 1.5 )
-z_index = 1
 frames = SubResource( 3 )
-frame = 7
+frame = 4
 playing = true
 
 [node name="Panel" type="Panel" parent="Container"]
