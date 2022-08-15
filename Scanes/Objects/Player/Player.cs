@@ -25,7 +25,6 @@ public class Player : KinematicBody
 	[Puppet]
 	Vector3 puppet_velocity;
 	
-	public Save save;
 	public override void _Ready()
 	{
 		movement_tween = GetNode<Tween>("Tween");
@@ -35,9 +34,6 @@ public class Player : KinematicBody
 		camera = GetNode<Camera>("Position3D/Camera");
 		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
 		flashlightcam = GetNode<Camera>("Position3D/Camera/ViewportContainer/Viewport/Flashlight");
-		save = (Save)GetNode("/root/Save");
-		//float fov = (float)save.gameSettings["fov"];
-		//camera.Fov = fov;
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -114,7 +110,6 @@ public class Player : KinematicBody
 		if (Input.IsActionPressed("sprint"))
 		{
 			velocity = velocity.LinearInterpolate(direction * sprintspeed, acc * delta);
-			float fov = (float)save.gameSettings["fov"];
 			flashlightcam.Fov = 90; 
 			camera.Fov = 90;
 		}

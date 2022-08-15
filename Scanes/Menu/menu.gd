@@ -5,7 +5,7 @@ func _on_Play_pressed():
 	get_tree().change_scene("res://Scanes/Server/networkconnection.tscn")
 
 func _on_Options_pressed():
-	var settings = load("res://Scanes/Menu/Settings/Settings.tscn").instance()
+	var settings = load("res://Scanes/Menu/Settings.tscn").instance()
 	get_node("/root/").add_child(settings)
 
 func _on_Exit_pressed():

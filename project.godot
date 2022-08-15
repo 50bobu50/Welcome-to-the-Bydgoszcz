@@ -17,7 +17,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Network="*res://Scanes/Server/network.gd"
-Save="*res://Scanes/Menu/Settings/Save.cs"
 
 [debug]
 
