@@ -27,6 +27,8 @@ public class Meta : Sprite3D
 	[Sync]
 	public void PickUpSnyc()
 	{
+		(this.GetParent().GetParent() as Game).PointsCollected++;
+		(this.GetParent().GetParent() as Game).ShowPoints();
 		QueueFree();
 	}
 }	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scanes/Objects/Meta/Meta.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Grass.tres" type="Material" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scanes/Objects/Tree/Drzwo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Textures/jinx.png" type="Texture" id=5]
 [ext_resource path="res://Scanes/Main/Game.cs" type="Script" id=6]
+[ext_resource path="res://Textures/Meth.png" type="Texture" id=7]
+[ext_resource path="res://Scanes/menu font.tres" type="DynamicFont" id=8]
 
 [sub_resource type="BoxShape" id=3]
 
@@ -130,3 +132,39 @@ texture = ExtResource( 5 )
 [node name="Meta" parent="MetaHolder" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 2.25918, 0 )
 shaded = true
+
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Collected" type="Label" parent="UI"]
+margin_left = 1830.0
+margin_top = 5.0
+margin_right = 1870.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 8 )
+text = "1"
+align = 1
+
+[node name="Label2" type="Label" parent="UI"]
+margin_left = 1855.0
+margin_top = 5.0
+margin_right = 1895.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 8 )
+text = "/"
+align = 1
+
+[node name="Max" type="Label" parent="UI"]
+margin_left = 1880.0
+margin_top = 5.0
+margin_right = 1920.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 8 )
+text = "2"
+align = 1
+
+[node name="Meth" type="Sprite" parent="UI"]
+position = Vector2( 1824, 21 )
+scale = Vector2( 0.335938, 0.335938 )
+texture = ExtResource( 7 )

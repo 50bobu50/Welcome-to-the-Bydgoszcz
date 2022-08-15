@@ -103,7 +103,6 @@ public class Player : KinematicBody
 					if(area.GetParent().GetParent().Name=="MetaHolder")
 					{
 						(area.GetParent() as Meta).PickUp();
-						(GetNode<Node>("/root") as Game).ShowAmountOfPoints();
 					}
 				}
 			}
