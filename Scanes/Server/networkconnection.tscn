@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scanes/Server/network_setup.gd" type="Script" id=1]
 [ext_resource path="res://Scanes/menu font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Scanes/Server/LOBBY.gd" type="Script" id=3]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.109804, 0.101961, 0.129412, 1 )
+[ext_resource path="res://Scanes/Lobby/LOBBY.tscn" type="PackedScene" id=3]
 
 [node name="server_gui" type="Control"]
 anchor_right = 1.0
@@ -65,37 +62,10 @@ rect_min_size = Vector2( 600, 180 )
 custom_fonts/font = ExtResource( 2 )
 text = "JOIN"
 
-[node name="LOBBY" type="Container" parent="." groups=["Lobby"]]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 3 )
-
-[node name="ItemList" type="ItemList" parent="LOBBY"]
-margin_right = 1920.0
-margin_bottom = 900.0
-rect_min_size = Vector2( 500, 0 )
-custom_fonts/font = ExtResource( 2 )
-
-[node name="Panel" type="Panel" parent="LOBBY"]
-margin_top = 900.0
-margin_right = 40.0
-margin_bottom = 900.0
-rect_min_size = Vector2( 1920, 180 )
-
-[node name="CheckBox" type="CheckBox" parent="LOBBY"]
-margin_left = 1600.0
-margin_top = 915.0
-margin_right = 1900.0
-margin_bottom = 1065.0
-rect_min_size = Vector2( 300, 150 )
-custom_fonts/font = ExtResource( 2 )
-custom_styles/normal = SubResource( 1 )
-text = "READY?"
-align = 1
+[node name="LOBBY" parent="." instance=ExtResource( 3 )]
 
 [connection signal="text_changed" from="JOINMENU/NAME" to="JOINMENU" method="_on_NAME_text_changed"]
 [connection signal="text_changed" from="JOINMENU/NAME" to="JOINMENU" method="_on_IP_text_changed"]
 [connection signal="text_changed" from="JOINMENU/IP" to="JOINMENU" method="_on_IP_text_changed"]
 [connection signal="pressed" from="JOINMENU/HOST" to="JOINMENU" method="_on_HOST_pressed"]
 [connection signal="pressed" from="JOINMENU/JOIN" to="JOINMENU" method="_on_JOIN_pressed"]
-[connection signal="toggled" from="LOBBY/CheckBox" to="LOBBY" method="_on_CheckBox_toggled"]

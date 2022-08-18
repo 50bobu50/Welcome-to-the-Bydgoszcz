@@ -15,6 +15,8 @@ public class Saul : KinematicBody
 	KinematicBody target = null;
 	Vector3 targetPos;
 	Godot.Collections.Array targets;
+	Godot.Collections.Array Empty;
+	
 	public override void _Ready()
 	{
 		navAgent = GetNode<NavigationAgent>("NavigationAgent");
@@ -25,7 +27,10 @@ public class Saul : KinematicBody
 	{
 		float targetDistance = 0f;
 		//Target location
-		targets = GetTree().GetNodesInGroup("Player");
+		if(targets==Empty)
+		{
+			return;
+		}
 		foreach (KinematicBody player in targets)
 		{
 			if(player.GlobalTransform.origin.DistanceTo(GlobalTransform.origin)<targetDistance || target is null)

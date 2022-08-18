@@ -11,12 +11,9 @@
 [node name="StaticBody" type="StaticBody" parent="Cube" index="0"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Cube/StaticBody" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="StaticBody" type="StaticBody" parent="Cube001" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cube001/StaticBody" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 2 )

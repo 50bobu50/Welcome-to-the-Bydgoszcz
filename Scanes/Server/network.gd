@@ -8,7 +8,7 @@ var MAX_PLAYERS  = 5
 var server
 var client 
 var players = {}
-var info = {"name":null, "ready":false}
+var info = {"name":null, "ready":false, "status":"before game"}
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -92,7 +92,10 @@ sync func check_ready():
 	rpc("load_map")
 
 sync func load_map():
-	get_node("/root/server_gui/LOBBY").visible = false
+	if(get_node_or_null("/root/server_gui/LOBBY")==null):
+		get_node("/root/LOBBY").visible = false
+	if(get_node_or_null("/root/server_gui/LOBBY")!=null):
+		get_node("/root/server_gui/LOBBY").visible = false
 	var world = load("res://Scanes/Main/Main.tscn").instance()
 	get_node("/root/").add_child(world)
 	for i in players:

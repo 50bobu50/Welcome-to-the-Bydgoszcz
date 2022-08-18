@@ -39,5 +39,27 @@ public class Game : Node
 	{
 		PickUpText.Visible = false;
 	}
+	public void _on_Area_body_entered(object body)
+	{
+		Node bodyNode = body as Node;
+		if(bodyNode.GetParent().Name=="Players")
+		{
+			EscapePlan();
+		}
+	}
+	void EscapePlan()
+	{
+		Rpc("PlayerEscaped");
+		(GetNode("UI") as CanvasItem).Visible = false;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+		GetTree().ChangeScene("res://Scanes/Lobby/LOBBY.tscn");
+	}
+	[Sync]
+	public void PlayerEscaped()
+	{
+		int id = GetTree().GetRpcSenderId();
+		GetTree().CallGroup("Lobby","player_escaped",id);
+		string path = "Players/"+id;
+		GetNode(path).QueueFree();
+	}
 }
-
