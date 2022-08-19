@@ -23,6 +23,9 @@ public class Player : KinematicBody
 	AudioStreamPlayer3D muza;
 	float muzaplaybackposition = 0;
 
+	//Aanimacja FSSAFNOSNFOSABFNO
+	AnimationTree blendtree;
+	AnimationNodeStateMachinePlayback blendmode;
 
 	Tween movement_tween;
 	[Puppet]
@@ -42,6 +45,11 @@ public class Player : KinematicBody
 		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
 		flashlightcam = GetNode<Camera>("Position3D/Camera/ViewportContainer/Viewport/Flashlight");
 		muza = GetNode<AudioStreamPlayer3D>("Position3D/Muza");
+
+		//Animacja
+		blendtree = GetNode<AnimationTree>("AnimationTree");
+		blendmode = (AnimationNodeStateMachinePlayback)blendtree.Get("parameters/playback");
+		
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -132,7 +140,9 @@ public class Player : KinematicBody
 		}
 		
 		Vector3 xzspeed = new Vector3(velocity.x,0,velocity.z);
-		if (Mathf.Round(xzspeed.LengthSquared()) > 220)
+		float playerspeed = xzspeed.LengthSquared();
+
+		if (playerspeed > 220)
 		{
 			if (muza.Playing == false)
 			{
@@ -147,8 +157,22 @@ public class Player : KinematicBody
 				muzaplaybackposition = muza.GetPlaybackPosition();
 				muza.Stop();
 			}
-
 		}
+
+		//ZAMNimations
+		//GD.Print(playerspeed/100);
+		GD.Print(blendtree.Get("parameters/Walk/blend_position"));
+		//blendtree.Set("parameters/Walk/blend_position",Mathf.Clamp(playerspeed/100,0,1));
+		
+		if (playerspeed/100 > 0.6f)
+		{
+			blendmode.Travel("Walk");
+		}
+		else
+		{
+			blendmode.Travel("Default");
+		}
+
 
 		velocity = velocity.LinearInterpolate(direction * speed, acc * delta);
 		velocity = velocity + gravityforce;
