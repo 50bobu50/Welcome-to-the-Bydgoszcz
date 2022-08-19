@@ -34,6 +34,7 @@ public class Game : Node
 	{
 		Gate.Play("Cube001Action");
 		Gate.Play("CubeAction001");
+		(PickUpText as Label).Text = "GATE IS OPEN";
 	}
 	public void _on_Timer_timeout()
 	{

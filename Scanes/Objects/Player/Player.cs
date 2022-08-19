@@ -29,6 +29,8 @@ public class Player : KinematicBody
 	Vector3 puppet_position;
 	[Puppet]
 	Vector3 puppet_velocity;
+	[Puppet]
+	Vector3 puppet_rotation;
 	
 	public override void _Ready()
 	{
@@ -47,7 +49,7 @@ public class Player : KinematicBody
 		if (IsNetworkMaster())
 		{
 			Movement(delta);
-			RpcUnreliable("upddate_state", GlobalTransform.origin, velocity);
+			RpcUnreliable("upddate_state", GlobalTransform.origin, velocity, Rotation);
 		}
 		else
 		{
@@ -55,13 +57,15 @@ public class Player : KinematicBody
 			GTransform.origin = puppet_position;
 			velocity.x = puppet_velocity.x;
 			velocity.z = puppet_velocity.z;
+			Rotation = puppet_rotation;
 		}
 	} 
 	[Puppet]
-	public void upddate_state(Vector3 p_position, Vector3 p_velocity)
+	public void upddate_state(Vector3 p_position, Vector3 p_velocity, Vector3 p_rotation)
 	{
 		puppet_velocity = p_velocity;
 		puppet_position = p_position;
+		puppet_rotation = p_rotation;
 		movement_tween.InterpolateProperty(this,"global_transform",GlobalTransform, new Transform(GlobalTransform.basis,p_position),0.1f);
 		movement_tween.Start();
 	}
