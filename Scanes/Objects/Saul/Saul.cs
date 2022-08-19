@@ -26,6 +26,7 @@ public class Saul : KinematicBody
 	public override void _PhysicsProcess(float delta)
 	{
 		float targetDistance = 0f;
+		targets = GetNode("../Players").GetChildren();
 		//Target location
 		if(targets==Empty)
 		{

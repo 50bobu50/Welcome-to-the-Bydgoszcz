@@ -4,9 +4,9 @@ var item_list
 var status_list
 
 func _ready():
-	update_lobby(Network.players)
+	update_lobby()
 
-func update_lobby(players):
+func update_lobby():
 	item_list = $ItemList
 	item_list.clear()
 	status_list = $Status
