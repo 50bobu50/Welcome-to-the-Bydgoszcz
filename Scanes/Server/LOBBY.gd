@@ -20,5 +20,7 @@ func _on_CheckBox_toggled(button_pressed):
 	Network.set_ready(button_pressed)
 
 func player_escaped(id):
-	print(id)
 	Network.players[id]["status"] = "Escaped"
+
+func player_died(id):
+	Network.players[id]["status"] = "Died"

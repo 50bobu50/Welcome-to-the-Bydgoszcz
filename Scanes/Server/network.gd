@@ -104,3 +104,4 @@ sync func load_map():
 		player.set_network_master(i)
 		get_node("/root/Main/Players").add_child(player)
 		Network.players[i]["ready"]=false
+		Network.players[i]["status"]="in game"

@@ -161,7 +161,7 @@ public class Player : KinematicBody
 
 		//ZAMNimations
 		//GD.Print(playerspeed/100);
-		GD.Print(blendtree.Get("parameters/Walk/blend_position"));
+		//GD.Print(blendtree.Get("parameters/Walk/blend_position"));
 		//blendtree.Set("parameters/Walk/blend_position",Mathf.Clamp(playerspeed/100,0,1));
 		
 		if (playerspeed/100 > 0.6f)
