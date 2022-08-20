@@ -29,7 +29,7 @@ public class Saul : KinematicBody
 		{
 			return;
 		}
-		while(IsInstanceValid(target as Node))
+		if(IsInstanceValid(target as Node))
 		{
 			targetPos = target.GlobalTransform.origin;
 			velocity = Vector3.Zero;
@@ -63,7 +63,6 @@ public class Saul : KinematicBody
 				LookAt(lookDirection,Vector3.Up);
 			}
 			MoveAndSlide(velocity, Vector3.Up);
-			break;
 		}
 	}
 	public void _on_Timer_timeout()
