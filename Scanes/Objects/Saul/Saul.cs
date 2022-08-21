@@ -71,6 +71,7 @@ public class Saul : KinematicBody
 		{
 			float targetDistance = 0f;
 			targets = GetNode("../Players").GetChildren();
+			target = null;
 			//Target location
 			if(targets==Empty)
 			{
@@ -84,14 +85,16 @@ public class Saul : KinematicBody
 					target = player;
 				}
 			}
-			Rpc("setTarget",target);
+			if(GetTree().IsNetworkServer())
+			{
+				Rpc("setTarget",target.GetPath());
+			}
 		}
 	}
 	[Sync]
-	public void setTarget(KinematicBody targetM)
+	public void setTarget(Godot.NodePath targetM)
 	{
-		GD.Print("aaa");
-		target = targetM;
+		target = GetNode(targetM) as KinematicBody;
 	}
 	public void _on_Area_body_entered(object body)
 	{
