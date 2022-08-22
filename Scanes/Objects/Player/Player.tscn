@@ -924,6 +924,7 @@ states/Walk/node = SubResource( 10 )
 states/Walk/position = Vector2( 340, 63 )
 transitions = [ "Default", "Walk", SubResource( 11 ), "Walk", "Default", SubResource( 12 ) ]
 start_node = "Default"
+graph_offset = Vector2( -173, -18 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 

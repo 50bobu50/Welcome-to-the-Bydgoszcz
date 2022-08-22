@@ -49,7 +49,7 @@ modulate = Color( 1, 1, 1, 0.317647 )
 position = Vector2( 960, 540 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 3 )
-frame = 6
+frame = 3
 playing = true
 
 [node name="Panel" type="Panel" parent="Container"]
