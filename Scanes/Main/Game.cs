@@ -53,6 +53,13 @@ public class Game : Node
 		Rpc("PlayerEscaped");
 		(GetNode("UI") as CanvasItem).Visible = false;
 		Input.MouseMode = Input.MouseModeEnum.Visible;
+		foreach(Node child in GetTree().GetRoot().GetChildren())
+		{
+			if(child.Name!="Network")
+			{
+				child.QueueFree();
+			}
+		}
 		GetTree().ChangeScene("res://Scanes/Lobby/LOBBY.tscn");
 	}
 	[Sync]
