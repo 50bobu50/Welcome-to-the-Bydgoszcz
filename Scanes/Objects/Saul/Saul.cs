@@ -87,7 +87,7 @@ public class Saul : KinematicBody
 			}
 			if(GetTree().IsNetworkServer())
 			{
-				if(target!=null)
+				if (target != null)
 				{
 					Rpc("setTarget",target.GetPath());
 				}
