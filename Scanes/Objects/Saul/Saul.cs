@@ -158,6 +158,7 @@ public class Saul : KinematicBody
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		foreach(Node child in GetTree().Root.GetChildren())
 		{
+			GD.Print(child.Name);
 			if(child.Name!="Network")
 			{
 				child.QueueFree();

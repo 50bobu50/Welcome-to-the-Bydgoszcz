@@ -5,7 +5,16 @@ var status_list
 
 func _ready():
 	update_lobby()
-	#$VideoPlayer.play()
+	check()
+	
+remote func check():
+	if(Network.players.empty()):
+		return
+	if(Network.players[get_tree().get_network_unique_id()]["status"] == "Died"):
+		$VideoPlayer.visible = true
+		$VideoPlayer.play()
+		yield(get_tree().create_timer(7.0), "timeout")
+		$VideoPlayer.visible = false
 
 func update_lobby():
 	item_list = $ItemList
@@ -25,3 +34,9 @@ func player_escaped(id):
 
 func player_died(id):
 	Network.players[id]["status"] = "Died"
+
+func death():
+	print("aaa");
+	$VideoPlayer.visible = true
+	$VideoPlayer.play()
+	
