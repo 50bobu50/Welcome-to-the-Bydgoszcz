@@ -3,7 +3,7 @@ using System;
 
 public class Saul : KinematicBody
 {
-	float speed = 10f;
+	float speed = 15f;
 	float acc = 10f;
 	float gravity = 10f;
 
@@ -16,11 +16,19 @@ public class Saul : KinematicBody
 	Vector3 targetPos;
 	Godot.Collections.Array targets;
 	Godot.Collections.Array Empty;
+
+	//Aanimacja FSSAFNOSNFOSABFNO
+	AnimationTree blendtree;
+	AnimationNodeStateMachinePlayback blendmode;
 	
+
 	public override void _Ready()
 	{
 		navAgent = GetNode<NavigationAgent>("NavigationAgent");
 		navAgent.SetNavigation(GetNode<Navigation>("/root/Main/Navigation"));
+				//Animacja
+		blendtree = GetNode<AnimationTree>("AnimationTree");
+		blendmode = (AnimationNodeStateMachinePlayback)blendtree.Get("parameters/playback");
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -52,9 +60,45 @@ public class Saul : KinematicBody
 			{
 				gravityforce += Vector3.Down * gravity * delta;
 			}
+
 			//Velocity things
 			velocity = velocity.LinearInterpolate(direction * speed, acc * delta);
 			velocity = velocity + gravityforce;
+
+			//Velocity check
+			Vector3 xzspeed = new Vector3(velocity.x,0,velocity.z);
+			float playerspeed = xzspeed.LengthSquared();
+
+			String currentNodeName = blendmode.GetCurrentNode();
+			Boolean isPlaying = blendmode.IsPlaying();
+
+
+			GD.Print(playerspeed);
+
+			if (playerspeed > 50f)
+			{
+				if (currentNodeName != "Run")
+				{
+					blendmode.Travel("Run");
+				}
+			}
+			else if (playerspeed > 1f)
+			{
+				if (currentNodeName != "Walk")
+				{
+					blendmode.Travel("Walk");
+				}
+			}
+			else if (playerspeed < 0.5f)
+			{
+				if (currentNodeName != "Default")
+				{
+					blendmode.Travel("Default");
+				}
+			}
+
+
+
 			//LOOK AT FUNCTION
 			Vector3 lookDirection = GlobalTransform.origin - direction;
 			lookDirection.y = GlobalTransform.origin.y;
@@ -104,6 +148,7 @@ public class Saul : KinematicBody
 		Node bodyNode = body as Node;
 		if(bodyNode.GetParent().Name=="Players")
 		{
+			blendmode.Travel("Attack");
 			KillPlayer();
 		}
 	}
@@ -112,7 +157,7 @@ public class Saul : KinematicBody
 		Rpc("PlayerDied");
 		(GetNode("../UI") as CanvasItem).Visible = false;
 		Input.MouseMode = Input.MouseModeEnum.Visible;
-		foreach(Node child in GetTree().GetRoot().GetChildren())
+		foreach(Node child in GetTree().Root.GetChildren())
 		{
 			if(child.Name!="Network")
 			{
