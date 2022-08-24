@@ -198,5 +198,9 @@ public class Player : KinematicBody
 				GetTree().Quit();
 			}
 		}
+		if (@event.IsActionPressed("light"))
+		{
+			GetNode<Light>("Position3D/Camera/Viewmodel/SpotLight").LightEnergy *= -1;
+		}
 	}
 }

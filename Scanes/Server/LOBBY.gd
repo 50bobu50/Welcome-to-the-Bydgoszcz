@@ -5,6 +5,7 @@ var status_list
 
 func _ready():
 	update_lobby()
+	#$VideoPlayer.play()
 
 func update_lobby():
 	item_list = $ItemList

@@ -155,7 +155,6 @@ public class Saul : KinematicBody
 	void KillPlayer()
 	{
 		Rpc("PlayerDied");
-		(GetNode("../UI") as CanvasItem).Visible = false;
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		foreach(Node child in GetTree().Root.GetChildren())
 		{
