@@ -72,9 +72,6 @@ public class Saul : KinematicBody
 			String currentNodeName = blendmode.GetCurrentNode();
 			Boolean isPlaying = blendmode.IsPlaying();
 
-
-			GD.Print(playerspeed);
-
 			if (playerspeed > 50f)
 			{
 				if (currentNodeName != "Run")

@@ -865,7 +865,7 @@ skin = SubResource( 12 )
 material/0 = ExtResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="Pivot/Character/Armature/Skeleton"]
-transform = Transform( -2.85714, 0, 2.49779e-07, 0, 2.85714, 0, -2.49779e-07, 0, -2.85714, 1.31134e-07, 12.0286, 1.5 )
+transform = Transform( -2.85714, 0, 2.49779e-07, 0, 2.85714, 0, -2.49779e-07, 0, -2.85714, 6.05715e-07, 10.6, -3.92857 )
 light_color = Color( 1, 0, 0, 1 )
 light_energy = 0.8
 

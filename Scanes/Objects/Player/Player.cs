@@ -27,6 +27,10 @@ public class Player : KinematicBody
 	AnimationTree blendtree;
 	AnimationNodeStateMachinePlayback blendmode;
 
+	//Latarka 
+	Light flashlight;
+	float flashlightlevel;
+
 	Tween movement_tween;
 	[Puppet]
 	Vector3 puppet_position;
@@ -50,6 +54,9 @@ public class Player : KinematicBody
 		blendtree = GetNode<AnimationTree>("AnimationTree");
 		blendmode = (AnimationNodeStateMachinePlayback)blendtree.Get("parameters/playback");
 		
+		//Latarka
+		flashlight = GetNode<Light>("Position3D/Camera/Viewmodel/SpotLight");
+		flashlightlevel = flashlight.LightEnergy;
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -200,7 +207,14 @@ public class Player : KinematicBody
 		}
 		if (@event.IsActionPressed("light"))
 		{
-			GetNode<Light>("Position3D/Camera/Viewmodel/SpotLight").LightEnergy *= -1;
+			if (flashlight.LightEnergy == flashlightlevel)
+			{
+				flashlight.LightEnergy = 0;
+			}
+			else
+			{
+				flashlight.LightEnergy = flashlightlevel;
+			}
 		}
 	}
 }
