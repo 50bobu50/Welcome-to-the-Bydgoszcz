@@ -11,6 +11,7 @@ public class Game : Node
 	private AnimationPlayer Gate;
 	public override void _Ready()
 	{
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 		PointsMax = GetNode("MetaHolder").GetChildCount();
 		Max = (Label)GetNode("UI/Max");
 		Collected = (Label)GetNode("UI/Collected");

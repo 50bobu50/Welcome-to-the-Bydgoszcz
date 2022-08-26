@@ -3,7 +3,7 @@ using System;
 
 public class Saul : KinematicBody
 {
-	float speed = 15f;
+	[Export] public float speed = 15f;
 	float acc = 10f;
 	float gravity = 10f;
 

@@ -1,4 +1,6 @@
 extends Control
 
 func _on_Button_pressed():
-	get_parent().remove_child(self)
+	visible = false
+	if($"..".name != "Container"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

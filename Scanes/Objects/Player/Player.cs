@@ -42,7 +42,6 @@ public class Player : KinematicBody
 	public override void _Ready()
 	{
 		movement_tween = GetNode<Tween>("Tween");
-		Input.MouseMode = Input.MouseModeEnum.Captured;
 		character = GetNode<Spatial>("Pivot");
 		head = GetNode<Position3D>("Position3D");
 		camera = GetNode<Camera>("Position3D/Camera");
@@ -198,11 +197,12 @@ public class Player : KinematicBody
 			rotDeg.x = Mathf.Clamp(rotDeg.x, -80f, 80f);
 			head.RotationDegrees = rotDeg;
 		}
-		else if (@event is InputEventKey eventKey) 
+		else if (@event is InputEventKey eventKey)
 		{
 			if (eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape)
 			{
-				GetTree().Quit();
+				Input.MouseMode = Input.MouseModeEnum.Visible;
+				GetNode<CanvasItem>("../../UI/Stop").Visible = true;
 			}
 		}
 		if (@event.IsActionPressed("light"))
