@@ -6,6 +6,7 @@ public class Game : Node
 	Label Collected;
 	Label Max;
 	CanvasItem PickUpText;
+	public Saul SaulCharacter;
 	public int PointsCollected=0;
 	private int PointsMax;
 	private AnimationPlayer Gate;
@@ -19,7 +20,7 @@ public class Game : Node
 		Max.Text = PointsMax.ToString();
 		Gate = (AnimationPlayer)GetNode("Navigation/NavigationMeshInstance/Gate/AnimationPlayer");
 		PickUpText = (CanvasItem)GetNode("UI/PickUpText");
-		BotSaul = GetNode("Saul");
+		SaulCharacter = GetNode<Saul>("Saul");
 	}
 	
 	public void ShowPoints()
@@ -31,14 +32,13 @@ public class Game : Node
 		{
 			CollectedEveryPoint();
 		}
-		(BotSaul as Saul).Speed *= 1.27;
+		SaulCharacter.speed *= 1.2f;
 	} 
 	private void CollectedEveryPoint()
 	{
 		Gate.Play("Cube001Action");
 		Gate.Play("CubeAction001");
-		(PickUpText as Label).Text = "GATE IS OPEN";
-		
+		(PickUpText as Label).Text = "GATE IS OPEN";	
 	}
 	public void _on_Timer_timeout()
 	{

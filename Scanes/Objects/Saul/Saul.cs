@@ -72,7 +72,7 @@ public class Saul : KinematicBody
 			String currentNodeName = blendmode.GetCurrentNode();
 			Boolean isPlaying = blendmode.IsPlaying();
 
-			if (playerspeed > 50f)
+			if (playerspeed > 150f)
 			{
 				if (currentNodeName != "Run")
 				{
