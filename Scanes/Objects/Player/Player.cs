@@ -95,8 +95,12 @@ public class Player : KinematicBody
 		float hrot = GlobalTransform.basis.GetEuler().y;
 		float forwardInput = Input.GetActionStrength("move_back") - Input.GetActionStrength("move_forward");
 		float rightInput = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
+		if(Input.MouseMode==Input.MouseModeEnum.Visible)
+		{
+			forwardInput = 0f;
+			rightInput = 0f;
+		}
 		direction = new Vector3(rightInput,0,forwardInput).Rotated(Vector3.Up, hrot).Normalized();
-		
 		//Gravitation / falling
 		if (IsOnFloor())
 		{
@@ -107,7 +111,7 @@ public class Player : KinematicBody
 			gravityforce += Vector3.Down * gravity * delta;
 			direction = direction * 1.5f;
 		}
-
+		
 		//Jump 
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
@@ -186,6 +190,10 @@ public class Player : KinematicBody
 	}
 	public override void _Input(InputEvent @event)
 	{	
+		if(Input.MouseMode==Input.MouseModeEnum.Visible)
+		{
+			return;
+		}
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
 

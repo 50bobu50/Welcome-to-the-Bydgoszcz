@@ -50,7 +50,7 @@ modulate = Color( 1, 1, 1, 0.317647 )
 position = Vector2( 960, 540 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 3 )
-frame = 4
+frame = 6
 playing = true
 
 [node name="Panel" type="Panel" parent="Container"]
@@ -92,6 +92,7 @@ custom_styles/normal = SubResource( 2 )
 text = "WHY U LEAVE"
 
 [node name="Control" parent="Container" instance=ExtResource( 13 )]
+visible = false
 margin_right = 1920.0
 margin_bottom = 1080.0
 

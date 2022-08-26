@@ -115,6 +115,7 @@ margin_right = 1900.0
 margin_bottom = 1060.0
 
 [node name="PickUpText" type="Label" parent="UI"]
+visible = false
 margin_left = 825.0
 margin_top = 520.0
 margin_right = 1095.0
