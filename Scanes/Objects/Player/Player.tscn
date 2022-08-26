@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scanes/Objects/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Audio/MusicToJump.mp3" type="AudioStream" id=2]
-[ext_resource path="res://Scanes/Objects/Player/Flashlight.material" type="Material" id=3]
+[ext_resource path="res://Materials/Flashlight.material" type="Material" id=3]
 
 [sub_resource type="ArrayMesh" id=4]
 resource_name = "Player3_Cube005"
@@ -1233,6 +1233,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -0.3 )
 [node name="Camera" type="Camera" parent="Position3D"]
 cull_mask = 1048573
 fov = 55.0
+far = 35.0
 
 [node name="RayCast" type="RayCast" parent="Position3D/Camera"]
 enabled = true

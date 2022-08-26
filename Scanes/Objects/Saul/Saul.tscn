@@ -867,7 +867,7 @@ material/0 = ExtResource( 4 )
 [node name="OmniLight" type="OmniLight" parent="Pivot/Character/Armature/Skeleton"]
 transform = Transform( -2.85714, 0, 2.49779e-07, 0, 2.85714, 0, -2.49779e-07, 0, -2.85714, 6.05715e-07, 10.6, -3.92857 )
 light_color = Color( 1, 0, 0, 1 )
-light_energy = 0.8
+light_energy = 2.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Pivot/Character/Armature/Skeleton"]
 transform = Transform( -2.85714, 0, 2.49779e-07, 0, 2.85714, 0, -2.49779e-07, 0, -2.85714, 0, 12.2286, 0 )
