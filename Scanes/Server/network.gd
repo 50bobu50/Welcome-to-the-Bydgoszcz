@@ -10,6 +10,7 @@ var client
 var players = {}
 var info = {"name":null, "ready":false, "status":"before game"}
 
+
 func _ready():
 	# warning-ignore:return_value_discarded
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -90,11 +91,12 @@ sync func check_ready():
 		if(players[i]["ready"]==false):
 			return null
 	rpc("load_map")
-
+ 
 sync func load_map():
+	get_tree().set_pause(true)
 	if(get_node_or_null("/root/server_gui/LOBBY")==null):
 		get_node("/root/LOBBY").visible = false
-	if(get_node_or_null("/root/server_gui/LOBBY")!=null):
+	elif(get_node_or_null("/root/server_gui/LOBBY")!=null):
 		get_node("/root/server_gui/LOBBY").visible = false
 	var world = load("res://Scanes/Main/Main.tscn").instance()
 	get_node("/root/").add_child(world)
@@ -105,3 +107,25 @@ sync func load_map():
 		get_node("/root/Main/Players").add_child(player)
 		Network.players[i]["ready"]=false
 		Network.players[i]["status"]="in game"
+	if(get_tree().is_network_server()):
+		players_done.append(1)
+		if players_done.size() == players.size():
+			post_configure_game()
+	elif(get_tree().is_network_server()==false):
+		rpc_id(1,"done_conf")
+		
+var players_done = []
+remote func done_conf():
+	print("aaa")
+	var id = get_tree().get_rpc_sender_id()
+	assert(get_tree().is_network_server())
+	assert(id in players)
+	assert(not id in players_done)
+	players_done.append(id)
+	if players_done.size() == players.size():
+		rpc("post_configure_game")
+
+sync func post_configure_game():
+	print("aaa")
+	if 1 == get_tree().get_rpc_sender_id():
+		get_tree().set_pause(false)
