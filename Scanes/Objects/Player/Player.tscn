@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scanes/Objects/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Audio/MusicToJump.mp3" type="AudioStream" id=2]
 [ext_resource path="res://Materials/Flashlight.material" type="Material" id=3]
+[ext_resource path="res://Audio/PathSound.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/GrassSound.wav" type="AudioStream" id=5]
 
 [sub_resource type="ArrayMesh" id=4]
 resource_name = "Player3_Cube005"
@@ -1222,6 +1224,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0 )
 layers = 3
 light_energy = 0.2
 omni_range = 10.0
+
+[node name="WalkSound" type="Spatial" parent="Pivot"]
+
+[node name="GrassSound" type="AudioStreamPlayer3D" parent="Pivot/WalkSound"]
+stream = ExtResource( 5 )
+
+[node name="PathSound" type="AudioStreamPlayer3D" parent="Pivot/WalkSound"]
+stream = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0 )
