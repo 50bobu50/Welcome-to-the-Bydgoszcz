@@ -32,7 +32,7 @@ public class Game : Node
 		{
 			CollectedEveryPoint();
 		}
-		SaulCharacter.speed *= 1.2f;
+		SaulCharacter.speed *= 1.25f;
 	} 
 	private void CollectedEveryPoint()
 	{

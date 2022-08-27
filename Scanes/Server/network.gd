@@ -51,6 +51,8 @@ func _connected_ok():
 
 func _server_disconnected():
 	print("Disconnected from to the server")
+	get_tree().change_scene("res://Scanes/Menu/Menu.tscn");
+	players = {}
 	reset_networking_connection()
 
 func _connected_fail():
