@@ -28,10 +28,10 @@ script = ExtResource( 6 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.784024, 5 )
 navmesh = SubResource( 5 )
 
-[node name="Gate" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 5 )]
-transform = Transform( -0.517638, 0, 0.965926, 0, 2, 0, -1.93185, 0, -0.258819, 290.401, 3, -149 )
-
 [node name="MapV3" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 9 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 140, 0, -15.894 )
+
+[node name="Gate" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 5 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 140, 0, -15.894 )
 
 [node name="Players" type="Spatial" parent="."]
@@ -125,7 +125,7 @@ text = "MATH++"
 [node name="Timer" type="Timer" parent="UI/PickUpText"]
 
 [node name="Area" type="Area" parent="."]
-transform = Transform( 0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 293.123, 0.543053, -156.894 )
+transform = Transform( 0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 319.626, 0.543053, -165.192 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1647, -0.0358696, 3.99336 )
