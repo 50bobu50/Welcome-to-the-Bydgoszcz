@@ -945,6 +945,7 @@ graph_offset = Vector2( -173, -18 )
 
 [node name="Player" type="KinematicBody" groups=["Player"]]
 script = ExtResource( 1 )
+speed = 50.0
 
 [node name="Pivot" type="Spatial" parent="."]
 
@@ -1284,7 +1285,6 @@ spot_angle = 40.0
 stream = ExtResource( 2 )
 unit_db = -20.0
 max_db = -5.0
-autoplay = true
 max_distance = 50.0
 attenuation_filter_db = -50.0
 

@@ -9,7 +9,7 @@ public class Game : Node
 	public Saul SaulCharacter;
 	public int PointsCollected=0;
 	private int PointsMax;
-	private AnimationPlayer Gate;
+	private Node Gate;
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -18,7 +18,7 @@ public class Game : Node
 		Collected = (Label)GetNode("UI/Collected");
 		Collected.Text = PointsCollected.ToString();
 		Max.Text = PointsMax.ToString();
-		Gate = (AnimationPlayer)GetNode("Navigation/NavigationMeshInstance/Gate/AnimationPlayer");
+		Gate = GetNode("Navigation/NavigationMeshInstance/Gate");
 		PickUpText = (CanvasItem)GetNode("UI/PickUpText");
 		SaulCharacter = GetNode<Saul>("Saul");
 	}
@@ -36,8 +36,7 @@ public class Game : Node
 	} 
 	private void CollectedEveryPoint()
 	{
-		Gate.Play("Cube001Action");
-		Gate.Play("CubeAction001");
+		Gate.GetNode("Gate").QueueFree();
 		(PickUpText as Label).Text = "GATE IS OPEN";	
 	}
 	public void _on_Timer_timeout()

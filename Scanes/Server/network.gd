@@ -101,7 +101,7 @@ sync func load_map():
 	elif(get_node_or_null("/root/server_gui/LOBBY")!=null):
 		get_node("/root/server_gui/LOBBY").visible = false
 	var world = load("res://Scanes/Main/Main.tscn").instance()
-	get_node("/root/").add_child(world)
+	get_tree().get_root().add_child(world)
 	for i in players:
 		var player = preload("res://Scanes/Objects/Player/Player.tscn").instance()
 		player.set_name(str(i))

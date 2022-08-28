@@ -3,7 +3,7 @@ using System;
 
 public class Player : KinematicBody
 {
-	float speed = 10f;
+	[Export] public float speed = 10f;
 	float sprintspeed = 20f;
 	float acc = 10f;
 	float gravity = 10f;
@@ -151,24 +151,6 @@ public class Player : KinematicBody
 		
 		Vector3 xzspeed = new Vector3(velocity.x,0,velocity.z);
 		float playerspeed = xzspeed.LengthSquared();
-
-		if (playerspeed > 220)
-		{
-			if (muza.Playing == false)
-			{
-				//muza.Seek();
-				muza.Play(muzaplaybackposition);
-			}
-		}
-		else
-		{
-			if (muza.Playing == true)
-			{
-				muzaplaybackposition = muza.GetPlaybackPosition();
-				muza.Stop();
-			}
-		}
-
 		//ZAMNimations
 		//GD.Print(playerspeed/100);
 		//GD.Print(blendtree.Get("parameters/Walk/blend_position"));
