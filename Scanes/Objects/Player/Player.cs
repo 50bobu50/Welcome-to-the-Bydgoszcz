@@ -18,11 +18,12 @@ public class Player : KinematicBody
 	Spatial character;
 	RayCast raycastView;
 	Camera flashlightcam;
-
-	//Funny music things
-	AudioStreamPlayer3D muza;
-	float muzaplaybackposition = 0;
-
+	
+	//Normal music
+	AudioStreamPlayer3D path;
+	AudioStreamPlayer3D grass;
+	AudioStreamPlayer3D current;
+	
 	//Aanimacja FSSAFNOSNFOSABFNO
 	AnimationTree blendtree;
 	AnimationNodeStateMachinePlayback blendmode;
@@ -47,8 +48,9 @@ public class Player : KinematicBody
 		camera = GetNode<Camera>("Position3D/Camera");
 		raycastView = GetNode<RayCast>("Position3D/Camera/RayCast");
 		flashlightcam = GetNode<Camera>("Position3D/Camera/ViewportContainer/Viewport/Flashlight");
-		muza = GetNode<AudioStreamPlayer3D>("Position3D/Muza");
-
+		grass = GetNode<AudioStreamPlayer3D>("Position3D/Path");
+		path = GetNode<AudioStreamPlayer3D>("Position3D/Grass");
+		current = grass;
 		//Animacja
 		blendtree = GetNode<AnimationTree>("AnimationTree");
 		blendmode = (AnimationNodeStateMachinePlayback)blendtree.Get("parameters/playback");
@@ -100,6 +102,17 @@ public class Player : KinematicBody
 			forwardInput = 0f;
 			rightInput = 0f;
 		}
+		if(forwardInput!= 0 || rightInput!=0)
+		{
+			if(current.Playing == false)
+			{
+				current.Play();
+			}
+		}
+		else
+		{
+			current.Stop();
+		}
 		direction = new Vector3(rightInput,0,forwardInput).Rotated(Vector3.Up, hrot).Normalized();
 		//Gravitation / falling
 		if (IsOnFloor())
@@ -125,7 +138,7 @@ public class Player : KinematicBody
 			
 			if (result != null)
 			{
-				GD.Print(result.GetType());
+				//GD.Print(result.GetType());
 				if (result is Area area) 
 				{
 					if(area.GetParent().GetParent().Name=="MetaHolder")
@@ -205,6 +218,20 @@ public class Player : KinematicBody
 			{
 				flashlight.LightEnergy = flashlightlevel;
 			}
+		}
+	}
+	public void _on_Area_body_entered(object body)
+	{
+		Node parent = (body as Node).GetParent();
+		if(parent.Name=="Grass")
+		{
+			current.Stop();
+			current = grass;
+		}
+		else if(parent.Name =="Path")
+		{
+			current.Stop();
+			current = path;
 		}
 	}
 }

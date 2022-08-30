@@ -29,8 +29,8 @@ script = ExtResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.784024, 5 )
 navmesh = SubResource( 5 )
 
-[node name="MapV3" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 9 )]
-transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 140, 0, -15.894 )
+[node name="MapV4" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 9 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 140, 0, -20 )
 
 [node name="Gate" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 5 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 131.202, 0.87915, -13.0262 )
@@ -141,6 +141,9 @@ visible = false
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1647, -0.0358696, 3.99336 )
 shape = SubResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -256.012, 0.0810394, 106.731 )
 
 [connection signal="timeout" from="UI/PickUpText/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

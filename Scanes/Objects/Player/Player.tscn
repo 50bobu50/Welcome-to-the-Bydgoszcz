@@ -1,7 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scanes/Objects/Player/Player.cs" type="Script" id=1]
-[ext_resource path="res://Audio/MusicToJump.mp3" type="AudioStream" id=2]
 [ext_resource path="res://Materials/Flashlight.material" type="Material" id=3]
 [ext_resource path="res://Audio/PathSound.wav" type="AudioStream" id=4]
 [ext_resource path="res://Audio/GrassSound.wav" type="AudioStream" id=5]
@@ -943,9 +942,10 @@ graph_offset = Vector2( -173, -18 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
+[sub_resource type="BoxShape" id=16]
+
 [node name="Player" type="KinematicBody" groups=["Player"]]
 script = ExtResource( 1 )
-speed = 50.0
 
 [node name="Pivot" type="Spatial" parent="."]
 
@@ -1281,12 +1281,15 @@ spot_range = 25.0
 spot_attenuation = 1.36604
 spot_angle = 40.0
 
-[node name="Muza" type="AudioStreamPlayer3D" parent="Position3D"]
-stream = ExtResource( 2 )
-unit_db = -20.0
-max_db = -5.0
-max_distance = 50.0
-attenuation_filter_db = -50.0
+[node name="Path" type="AudioStreamPlayer3D" parent="Position3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.09088, 0 )
+stream = ExtResource( 4 )
+max_distance = 60.0
+
+[node name="Grass" type="AudioStreamPlayer3D" parent="Position3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.09088, 0 )
+stream = ExtResource( 5 )
+max_distance = 60.0
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -1295,3 +1298,11 @@ tree_root = SubResource( 13 )
 anim_player = NodePath("../Pivot/Character/AnimationPlayer")
 active = true
 parameters/playback = SubResource( 14 )
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

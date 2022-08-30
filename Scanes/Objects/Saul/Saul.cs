@@ -130,15 +130,16 @@ public class Saul : KinematicBody
 			{
 				if (target != null)
 				{
-					Rpc("setTarget",target.GetPath());
+					Rpc("setTarget",target.GetPath(),Translation);
 				}
 			}
 		}
 	}
 	[Sync]
-	public void setTarget(Godot.NodePath targetM)
+	public void setTarget(Godot.NodePath targetM,Vector3 transaltionM)
 	{
 		target = GetNode(targetM) as KinematicBody;
+		Translation = transaltionM;
 	}
 	public void _on_Area_body_entered(object body)
 	{

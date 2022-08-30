@@ -36,7 +36,6 @@ func player_died(id):
 	Network.players[id]["status"] = "Died"
 
 func death():
-	print("aaa");
 	$VideoPlayer.visible = true
 	$VideoPlayer.play()
 	

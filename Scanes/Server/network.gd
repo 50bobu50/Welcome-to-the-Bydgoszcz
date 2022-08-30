@@ -118,7 +118,6 @@ sync func load_map():
 		
 var players_done = []
 remote func done_conf():
-	print("aaa")
 	var id = get_tree().get_rpc_sender_id()
 	assert(get_tree().is_network_server())
 	assert(id in players)
@@ -128,6 +127,5 @@ remote func done_conf():
 		rpc("post_configure_game")
 
 sync func post_configure_game():
-	print("aaa")
 	if 1 == get_tree().get_rpc_sender_id():
 		get_tree().set_pause(false)
